@@ -20,8 +20,10 @@ Hyper parameters
 """
 parser = argparse.ArgumentParser()
 parser.add_argument('--grounding-model', default="IDEA-Research/grounding-dino-tiny")
+#parser.add_argument("--text-prompt", default="opening.")
 parser.add_argument("--text-prompt", default="wall. door. room. corridor. opening. hallway.")
-parser.add_argument("--img-path", default="notebooks/images/Figure_13_new.png")
+
+parser.add_argument("--img-path", default="notebooks/images/house-map-designing-services-500x500.jpg")
 parser.add_argument("--sam2-checkpoint", default="./checkpoints/sam2.1_hiera_large.pt")
 parser.add_argument("--sam2-model-config", default="configs/sam2.1/sam2.1_hiera_l.yaml")
 parser.add_argument("--output-dir", default="outputs/grounded_sam2_hf_demo/shir")
@@ -79,8 +81,8 @@ with torch.no_grad():
 results = processor.post_process_grounded_object_detection(
     outputs,
     inputs.input_ids,
-    box_threshold=0.4,
-    text_threshold=0.3,
+    box_threshold=0.1,
+    text_threshold=0.1,
     target_sizes=[image.size[::-1]]
 )
 
